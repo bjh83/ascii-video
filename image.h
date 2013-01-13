@@ -5,8 +5,8 @@
 
 namespace image {
 
-	static const int XRatio = 5;
-	static const int YRatio = 10;
+	static const int XRatio = 4;
+	static const int YRatio = 8;
 	
 	//Creates a lightweight reprasentation of a Mat
 	class Buffer {

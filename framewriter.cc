@@ -1,6 +1,6 @@
 #include"framewriter.h"
 
-FrameWriter::FrameWriter(int wait_time) : functor(mutex, cond, wait_time), thread(functor) {
+FrameWriter::FrameWriter(int frames_per_second) : functor(mutex, cond, 1000 / frames_per_second), thread(functor) {
 	initscr();
 }
 

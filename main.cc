@@ -18,7 +18,8 @@ int main(int argc, char* argv[]) {
 	}
 	string filename(argv[1]);
 	cv::VideoCapture capture(filename);
-	FrameWriter writer(50);
+	int frames_per_second = int(capture.get(CV_CAP_PROP_FPS));
+	FrameWriter writer(frames_per_second);
 	for(; capture.grab();) {
 		cv::Mat rgb_frame, gray_frame;
 		capture.retrieve(rgb_frame);

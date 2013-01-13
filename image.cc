@@ -33,7 +33,7 @@ namespace image {
 	}
 
 	unsigned char GetCellValue(int cell_average) {
-		cell_average /= 8;
+		cell_average /= 32;
 		switch(cell_average) {
 			case 7:
 				return '#';

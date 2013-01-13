@@ -3,6 +3,9 @@
 #include<opencv2/opencv.hpp>
 #include<opencv2/highgui/highgui.hpp>
 
+#include"image.h"
+#include"framewriter.h"
+
 using namespace std;
 
 namespace config {
@@ -16,11 +19,14 @@ int main(int argc, char* argv[]) {
 	}
 	string filename(argv[1]);
 	cv::VideoCapture capture(filename);
-	cv::Mat frame;
+	FrameWriter writer;
 	for(; capture.grab();) {
-		capture.retrieve(frame);
-		image::Buffer tempbuffer(frame), outbuffer;
-		image::CellScale(tempbuffer, &outbuffer);
+		cv::Mat rgb_frame, gray_frame;
+		capture.retrieve(rgb_frame);
+		cv::cvtColor(rgb_frame, gray_frame, CV_RGB2GRAY);
+		image::Buffer tempbuffer(frame), outbuffer; //Convert to image::Buffer
+		image::CellScale(tempbuffer, &outbuffer); //Convert to apropriately scaled buffer
+		writer << outbuffer;
 	}
 	return 0;
 }

@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
 	}
 	string filename(argv[1]);
 	cv::VideoCapture capture(filename);
-	FrameWriter writer;
+	FrameWriter writer(50);
 	for(; capture.grab();) {
 		cv::Mat rgb_frame, gray_frame;
 		capture.retrieve(rgb_frame);
@@ -26,7 +26,6 @@ int main(int argc, char* argv[]) {
 		image::Buffer tempbuffer(gray_frame), outbuffer; //Convert to image::Buffer
 		image::CellScale(tempbuffer, &outbuffer); //Convert to apropriately scaled buffer
 		writer << outbuffer;
-		writer.render();
 	}
 	return 0;
 }

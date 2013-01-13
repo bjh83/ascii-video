@@ -9,7 +9,7 @@ CC= g++
 all: $(PACKAGE)
 
 $(PACKAGE): $(OBJS)
-	$(CC) -o $(PACKAGE) $(OBJS) `pkg-config --libs opencv ncurses`
+	$(CC) -o $(PACKAGE) $(OBJS) `pkg-config --libs opencv ncurses` -lboost_thread
 
 .PHONY: clean
 

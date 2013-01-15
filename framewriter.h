@@ -40,10 +40,12 @@ class FrameWriter {
 		~FrameWriter();
 
 		inline void operator<<(const image::Buffer& frame) {
-			for(int y = 0; y < frame.get_height(); y++) {
-				for(int x = 0; x < frame.get_width(); x++) {
+			image::Buffer new_buffer;
+			image::CellScale(frame, &new_buffer, COLS, LINES);
+			for(int y = 0; y < new_buffer.get_height(); y++) {
+				for(int x = 0; x < new_buffer.get_width(); x++) {
 					move(y, x);
-					addch(frame.at(y, x));
+					addch(new_buffer.at(y, x));
 				}
 			}
 			boost::unique_lock<boost::mutex> lock(mutex);

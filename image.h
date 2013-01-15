@@ -5,8 +5,8 @@
 
 namespace image {
 
-	static const int XRatio = 4;
-	static const int YRatio = 8;
+	static const int XRatio = 1;
+	static const int YRatio = 2;
 	
 	//Creates a lightweight reprasentation of a Mat
 	class Buffer {
@@ -24,6 +24,7 @@ namespace image {
 
 			int get_width() const;
 			int get_height() const;
+			int get_scale_factor(int term_width, int term_height) const;
 			void resize(int width, int height);
 			~Buffer();
 		private:
@@ -33,7 +34,7 @@ namespace image {
 	};
 
 	//XXX: newbuffer is assumed to be non-null
-	void CellScale(const Buffer& original, Buffer* newbuffer);
+	void CellScale(const Buffer& original, Buffer* newbuffer, int term_width, int term_height);
 };
 #endif
 

@@ -24,9 +24,8 @@ int main(int argc, char* argv[]) {
 		cv::Mat rgb_frame, gray_frame;
 		capture.retrieve(rgb_frame);
 		cv::cvtColor(rgb_frame, gray_frame, CV_RGB2GRAY);
-		image::Buffer tempbuffer(gray_frame), outbuffer; //Convert to image::Buffer
-		image::CellScale(tempbuffer, &outbuffer); //Convert to apropriately scaled buffer
-		writer << outbuffer;
+		image::Buffer tempbuffer(gray_frame); //Convert to image::Buffer
+		writer << tempbuffer;
 	}
 	return 0;
 }

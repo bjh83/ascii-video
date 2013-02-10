@@ -1,6 +1,8 @@
 #include"image.h"
 #include<iostream>
 
+using namespace std;
+
 namespace image {
 
 	Buffer::Buffer(const cv::Mat& image) : width(image.cols), height(image.rows) {
@@ -24,7 +26,7 @@ namespace image {
 		return height;
 	}
 
-	int Buffer::get_scale_factor(int term_width, int term_height) const {
+	float Buffer::get_scale_factor(int term_width, int term_height) const {
 		if(float(term_width) / float(term_height) > float(width) / float(height)) {
 			return width / term_width;
 		} else {
@@ -64,12 +66,11 @@ namespace image {
 	}
 
 	void CellScale(const Buffer& original, Buffer* newbuffer, int term_width, int term_height) {
-		int scale_factor = original.get_scale_factor(term_width, term_height);
-		int xscaled = XRatio * scale_factor;
-		int yscaled = YRatio * scale_factor;
+		float scale_factor = original.get_scale_factor(term_width, term_height);
+		int xscaled = XRatio * int(scale_factor + 1);
+		int yscaled = YRatio * int(scale_factor + 1);
 		int new_width = original.get_width() / xscaled;
 		int new_height = original.get_height() / yscaled;
-		//std::cout << "scale_factor: " << scale_factor << "\n";
 		newbuffer->resize(new_width, new_height);
 		for(int newy = 0; newy < new_height; newy++) {
 			for(int newx = 0; newx < new_width; newx++) {

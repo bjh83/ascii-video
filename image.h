@@ -24,7 +24,7 @@ namespace image {
 
 			int get_width() const;
 			int get_height() const;
-			int get_scale_factor(int term_width, int term_height) const;
+			float get_scale_factor(int term_width, int term_height) const;
 			void resize(int width, int height);
 			~Buffer();
 		private:

@@ -1,5 +1,6 @@
 #include<string>
 #include<iostream>
+#include<fstream>
 #include<opencv2/opencv.hpp>
 #include<opencv2/highgui/highgui.hpp>
 #include"image.h"
@@ -18,6 +19,8 @@ int main(int argc, char* argv[]) {
 	}
 	string filename(argv[1]);
 	cv::VideoCapture capture(filename);
+	ofstream log_stream("logfile");
+	clog.rdbuf(log_stream.rdbuf());
 	int frames_per_second = int(capture.get(CV_CAP_PROP_FPS));
 	FrameWriter writer(frames_per_second);
 	for(; capture.grab();) {

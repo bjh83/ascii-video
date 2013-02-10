@@ -11,6 +11,12 @@ all: $(PACKAGE)
 $(PACKAGE): $(OBJS)
 	$(CC) -o $(PACKAGE) $(OBJS) `pkg-config --libs opencv ncurses` -lboost_thread
 
+main.o: image.h
+
+image.o: image.h
+
+framewriter.o: image.h framewriter.h
+
 .PHONY: clean
 
 clean:
